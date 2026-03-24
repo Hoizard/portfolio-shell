@@ -493,7 +493,7 @@ var m = reactDomExports;
   client.hydrateRoot = m.hydrateRoot;
 }
 
-const scriptRel = 'modulepreload';const assetsURL = function(dep) { return "https://hoizard.github.io/portfolio-shell/"+dep };const seen = {};const __vitePreload = function preload(baseModule, deps, importerUrl) {
+const scriptRel = 'modulepreload';const assetsURL = function(dep) { return "/portfolio-shell/"+dep };const seen = {};const __vitePreload = function preload(baseModule, deps, importerUrl) {
   let promise = Promise.resolve();
   if (true && deps && deps.length > 0) {
     document.getElementsByTagName("link");
