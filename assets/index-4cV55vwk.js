@@ -654,61 +654,116 @@ const remotesMap = {
 const React$1 = await importShared('react');
 const {Suspense,lazy,useEffect,useRef} = React$1;
 
-lazy(() => __federation_method_getRemote("mfe_vue_tasks" , "./TaskWidget").then(module=>__federation_method_wrapDefault(module, true)).then((m) => ({
-  default: m.default ?? m
-})));
-const WeatherWidget = lazy(() => __federation_method_getRemote("mfe_react_weather" , "./WeatherWidget").then(module=>__federation_method_wrapDefault(module, true)).then((m) => ({
-  default: m.default ?? m
-})));
-function CounterWidgetWrapper() {
-  const ref = useRef(null);
-  useEffect(() => {
-    __federation_method_getRemote("mfe_angular_counter" , "./CounterWidget").then(module=>__federation_method_wrapDefault(module, true)).catch(console.error);
-  }, []);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("counter-widget", { ref });
-}
+lazy(
+  () => __federation_method_getRemote("mfe_vue_tasks" , "./TaskWidget").then(module=>__federation_method_wrapDefault(module, true)).then((m) => ({
+    default: m.default ?? m
+  }))
+);
+lazy(
+  () => __federation_method_getRemote("mfe_react_weather" , "./WeatherWidget").then(module=>__federation_method_wrapDefault(module, true)).then((m) => ({
+    default: m.default ?? m
+  }))
+);
 function MfePanel({ color, label, sublabel, mountId, children }) {
   const colors = {
-    vue: { accent: "#42b883", bg: "rgba(66,184,131,0.08)", border: "rgba(66,184,131,0.25)" },
-    angular: { accent: "#dd0031", bg: "rgba(221,0,49,0.06)", border: "rgba(221,0,49,0.22)" },
-    react: { accent: "#149eca", bg: "rgba(20,158,202,0.07)", border: "rgba(20,158,202,0.22)" }
+    vue: {
+      accent: "#42b883",
+      bg: "rgba(66,184,131,0.08)",
+      border: "rgba(66,184,131,0.25)"
+    },
+    angular: {
+      accent: "#dd0031",
+      bg: "rgba(221,0,49,0.06)",
+      border: "rgba(221,0,49,0.22)"
+    },
+    react: {
+      accent: "#149eca",
+      bg: "rgba(20,158,202,0.07)",
+      border: "rgba(20,158,202,0.22)"
+    }
   };
   const c = colors[color];
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
-    border: `1px solid var(--border)`,
-    borderTop: `2px solid ${c.accent}`,
-    borderRadius: "10px",
-    overflow: "hidden",
-    display: "flex",
-    flexDirection: "column"
-  }, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: {
-      padding: "0.875rem 1.25rem",
-      borderBottom: "1px solid var(--border-light)",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      background: c.bg
-    }, children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: {
-        fontFamily: "var(--mono)",
-        fontSize: "11px",
-        fontWeight: 500,
-        color: c.accent,
-        border: `1px solid ${c.border}`,
-        background: "rgba(255,255,255,0.7)",
-        padding: "3px 9px",
-        borderRadius: "4px",
-        letterSpacing: "0.06em"
-      }, children: label }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("span", { style: { fontFamily: "var(--mono)", fontSize: "11px", color: "var(--hint)" }, children: sublabel })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flex: 1, padding: "1.25rem" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Suspense, { fallback: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { fontFamily: "var(--mono)", fontSize: "12px", color: "var(--hint)", textAlign: "center", padding: "2rem 0" }, children: [
-      "loading ",
-      label,
-      "…"
-    ] }), children }) })
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "div",
+    {
+      style: {
+        border: `1px solid var(--border)`,
+        borderTop: `2px solid ${c.accent}`,
+        borderRadius: "10px",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column"
+      },
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            style: {
+              padding: "0.875rem 1.25rem",
+              borderBottom: "1px solid var(--border-light)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              background: c.bg
+            },
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "span",
+                {
+                  style: {
+                    fontFamily: "var(--mono)",
+                    fontSize: "11px",
+                    fontWeight: 500,
+                    color: c.accent,
+                    border: `1px solid ${c.border}`,
+                    background: "rgba(255,255,255,0.7)",
+                    padding: "3px 9px",
+                    borderRadius: "4px",
+                    letterSpacing: "0.06em"
+                  },
+                  children: label
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "span",
+                {
+                  style: {
+                    fontFamily: "var(--mono)",
+                    fontSize: "11px",
+                    color: "var(--hint)"
+                  },
+                  children: sublabel
+                }
+              )
+            ]
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { style: { flex: 1, padding: "1.25rem" }, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          Suspense,
+          {
+            fallback: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                style: {
+                  fontFamily: "var(--mono)",
+                  fontSize: "12px",
+                  color: "var(--hint)",
+                  textAlign: "center",
+                  padding: "2rem 0"
+                },
+                children: [
+                  "loading ",
+                  label,
+                  "…"
+                ]
+              }
+            ),
+            children
+          }
+        ) })
+      ]
+    }
+  );
 }
 function VueTaskWrapper() {
   const mountRef = useRef(null);
@@ -824,15 +879,72 @@ function App() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "section-title", children: "Skills & Technologies" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "skills-grid", children: [
-          { title: "Frontend", tags: ["Vue 3", "TypeScript", "JavaScript", "Pinia", "Tanstack Query", "Vite", "Tailwind CSS"] },
-          { title: "Backend", tags: ["ASP.NET", "C#", "Entity Framework", "MS SQL", "Web API", "RxJS"] },
-          { title: "Testing & Tooling", tags: ["Vitest", "Cypress", "Docker", "Cursor", "GitHub"] },
-          { title: "Architecture", tags: ["Microfrontends", "ADRs", "Repository Pattern", "Streaming APIs", "SPA"] },
-          { title: "Learning Now", tags: ["AWS", "Kubernetes", "Terraform", "Azure OpenAI", "Python"], accent: true },
-          { title: "Domain", tags: ["Healthcare Tech", "Clinical Workflows", "Cross-team Leadership"] }
+          {
+            title: "Frontend",
+            tags: [
+              "Vue 3",
+              "TypeScript",
+              "JavaScript",
+              "Pinia",
+              "Tanstack Query",
+              "Vite",
+              "Tailwind CSS"
+            ]
+          },
+          {
+            title: "Backend",
+            tags: [
+              "ASP.NET",
+              "C#",
+              "Entity Framework",
+              "MS SQL",
+              "Web API",
+              "RxJS"
+            ]
+          },
+          {
+            title: "Testing & Tooling",
+            tags: ["Vitest", "Cypress", "Docker", "Cursor", "GitHub"]
+          },
+          {
+            title: "Architecture",
+            tags: [
+              "Microfrontends",
+              "ADRs",
+              "Repository Pattern",
+              "Streaming APIs",
+              "SPA"
+            ]
+          },
+          {
+            title: "Learning Now",
+            tags: [
+              "AWS",
+              "Kubernetes",
+              "Terraform",
+              "Azure OpenAI",
+              "Python"
+            ],
+            accent: true
+          },
+          {
+            title: "Domain",
+            tags: [
+              "Healthcare Tech",
+              "Clinical Workflows",
+              "Cross-team Leadership"
+            ]
+          }
         ].map((group, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "skill-group", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "skill-group-title", children: group.title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "skill-tags", children: group.tags.map((t, j) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `tag ${group.accent ? "tag-accent" : ""}`, children: t }, j)) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "skill-tags", children: group.tags.map((t, j) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "span",
+            {
+              className: `tag ${group.accent ? "tag-accent" : ""}`,
+              children: t
+            },
+            j
+          )) })
         ] }, i)) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "mfe-demo", className: "section", children: [
@@ -851,11 +963,16 @@ function App() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "arch-sep", children: "·" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "arch-node arch-rea", children: "mfe-react-weather" })
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mfe-panels", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(MfePanel, { color: "vue", label: "Vue 3", sublabel: "Composition API", mountId: "vue-mfe", children: /* @__PURE__ */ jsxRuntimeExports.jsx(VueTaskWrapper, {}) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(MfePanel, { color: "angular", label: "Angular", sublabel: "Custom Element", mountId: "angular-mfe", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CounterWidgetWrapper, {}) }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(MfePanel, { color: "react", label: "React 18", sublabel: "Hooks + State", mountId: "react-mfe", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Suspense, { fallback: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mfe-loading", children: "loading React MFE…" }), children: /* @__PURE__ */ jsxRuntimeExports.jsx(WeatherWidget, {}) }) })
-          ] })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mfe-panels", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+            MfePanel,
+            {
+              color: "vue",
+              label: "Vue 3",
+              sublabel: "Composition API",
+              mountId: "vue-mfe",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsx(VueTaskWrapper, {})
+            }
+          ) })
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "projects", className: "section", children: [
@@ -869,38 +986,82 @@ function App() {
             name: "Gaming Stats Dashboard",
             status: "building",
             desc: "Real-time dashboard pulling stats from Steam & Riot Games APIs. AI-powered coaching tips via Azure OpenAI. End-to-end cloud deployment on AWS.",
-            tech: ["Vue 3", "ASP.NET", "AWS EC2", "Docker", "Azure OpenAI", "PostgreSQL"]
+            tech: [
+              "Vue 3",
+              "ASP.NET",
+              "AWS EC2",
+              "Docker",
+              "Azure OpenAI",
+              "PostgreSQL"
+            ]
           },
           {
             icon: "🔧",
             name: "AI Home Maintenance Tracker",
             status: "planned",
             desc: "Log tasks, track tools, get AI repair guides. Upload a photo of something broken — get step-by-step fix instructions via Azure AI Vision.",
-            tech: ["Vue 3", "Semantic Kernel", "Azure AI Vision", "pgvector", "Service Bus"]
+            tech: [
+              "Vue 3",
+              "Semantic Kernel",
+              "Azure AI Vision",
+              "pgvector",
+              "Service Bus"
+            ]
           },
           {
             icon: "🎵",
             name: "Smart Music Discovery",
             status: "planned",
             desc: "Connects to Spotify API, generates embeddings of your taste profile, and surfaces recommendations using vector similarity search.",
-            tech: ["Vue 3", "FastAPI", "OpenAI Embeddings", "Pinecone", "Redis", "AWS Lambda"]
+            tech: [
+              "Vue 3",
+              "FastAPI",
+              "OpenAI Embeddings",
+              "Pinecone",
+              "Redis",
+              "AWS Lambda"
+            ]
           },
           {
             icon: "⚡",
             name: "MFE Portfolio Shell",
             status: "live",
             desc: "This site. Vue 3, Angular-style Web Component, and React 18 loaded via Module Federation from separate GitHub repos — each deploying independently.",
-            tech: ["Vue 3", "React 18", "Web Components", "Module Federation", "GitHub Pages"]
+            tech: [
+              "Vue 3",
+              "React 18",
+              "Web Components",
+              "Module Federation",
+              "GitHub Pages"
+            ]
           }
-        ].map((p, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: `project-card ${p.status === "live" ? "project-live" : ""}`, children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "project-icon", children: p.icon }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { style: { display: "flex", alignItems: "center", gap: "8px", flexWrap: "wrap" }, children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "project-name", children: p.name }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `project-status status-${p.status}`, children: p.status === "building" ? "In Progress" : p.status === "planned" ? "Planned" : "Live" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "project-desc", children: p.desc }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "project-tech", children: p.tech.map((t, j) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ptag", children: t }, j)) })
-        ] }, i)) })
+        ].map((p, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: `project-card ${p.status === "live" ? "project-live" : ""}`,
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "project-icon", children: p.icon }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    flexWrap: "wrap"
+                  },
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "project-name", children: p.name }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: `project-status status-${p.status}`, children: p.status === "building" ? "In Progress" : p.status === "planned" ? "Planned" : "Live" })
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "project-desc", children: p.desc }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "project-tech", children: p.tech.map((t, j) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "ptag", children: t }, j)) })
+            ]
+          },
+          i
+        )) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "resume", className: "section", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-header", children: [
@@ -927,19 +1088,29 @@ function App() {
                   title: "Software Engineer II",
                   dates: "Apr 2022 – Present",
                   company: "Oak Street Health",
-                  bullets: ["Led microfrontend migration to Vue 3 + Vite + Vitest", "Built collaborative editing with streaming endpoints & Tanstack Query", "Established ADRs and frontend coding standards"]
+                  bullets: [
+                    "Led microfrontend migration to Vue 3 + Vite + Vitest",
+                    "Built collaborative editing with streaming endpoints & Tanstack Query",
+                    "Established ADRs and frontend coding standards"
+                  ]
                 },
                 {
                   title: "Software Engineer",
                   dates: "Apr 2021 – Mar 2022",
                   company: "Oak Street Health",
-                  bullets: ["Increased doc signing by 88.46% (10,670 docs) in week one", "Built first streaming service with RxJS for live clinical updates"]
+                  bullets: [
+                    "Increased doc signing by 88.46% (10,670 docs) in week one",
+                    "Built first streaming service with RxJS for live clinical updates"
+                  ]
                 },
                 {
                   title: "Junior Application Developer",
                   dates: "Jun 2019 – Mar 2021",
                   company: "Oak Street Health",
-                  bullets: ["Windows services for automated healthcare workflows", "Automated referral task flow via ASP.NET"]
+                  bullets: [
+                    "Windows services for automated healthcare workflows",
+                    "Automated referral task flow via ASP.NET"
+                  ]
                 },
                 {
                   title: "Computer Engineer",
@@ -955,7 +1126,14 @@ function App() {
                 /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "res-job-company", children: job.company }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "res-bullets", children: job.bullets.map((b, j) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: b }, j)) })
               ] }, i)),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "res-section-title", style: { marginTop: "1.5rem" }, children: "Education" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "res-section-title",
+                  style: { marginTop: "1.5rem" },
+                  children: "Education"
+                }
+              ),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "res-edu-school", children: "Illinois Institute of Technology" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "res-edu-degree", children: "MS & BS in Software Development" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "res-edu-year", children: "Chicago, IL · May 2019" })
@@ -963,8 +1141,22 @@ function App() {
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "res-section-title", children: "Skills" }),
               [
-                { label: "Frontend", tags: ["TypeScript", "JavaScript", "VueJS", "Pinia", "Tanstack Query", "Vite", "Tailwind CSS"] },
-                { label: "Backend", tags: ["ASP.NET", "C#", "MS SQL", "Entity Framework"] },
+                {
+                  label: "Frontend",
+                  tags: [
+                    "TypeScript",
+                    "JavaScript",
+                    "VueJS",
+                    "Pinia",
+                    "Tanstack Query",
+                    "Vite",
+                    "Tailwind CSS"
+                  ]
+                },
+                {
+                  label: "Backend",
+                  tags: ["ASP.NET", "C#", "MS SQL", "Entity Framework"]
+                },
                 { label: "Testing", tags: ["Vitest", "Cypress"] },
                 { label: "DevOps", tags: ["Docker", "Cursor"] }
               ].map((g, i) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "res-skill-group", children: [
@@ -974,35 +1166,17 @@ function App() {
             ] })
           ] })
         ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "contact", className: "section", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "section-header", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "section-eyebrow", children: "Let's connect" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "section-title", children: "Get in Touch" })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "contact-grid", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "contact-block", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "contact-label", children: "Email" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "mailto:erickcruz147@gmail.com", className: "contact-val", children: "erickcruz147@gmail.com" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "contact-block", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "contact-label", children: "Phone" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "contact-val", children: "(773) 818-6161" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "contact-block", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "contact-label", children: "Location" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "contact-val", children: "Chicago, IL" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "contact-block", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "contact-label", children: "Open To" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "contact-val", children: "Senior Engineer roles" })
-          ] })
-        ] })
       ] })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("footer", { className: "footer", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "footer-copy", children: "© 2025 Erick Cruz" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "footer-pills", children: ["Vue 3", "React 18", "Web Components", "Module Federation", "GitHub Pages"].map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "footer-pill", children: t }, i)) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "footer-pills", children: [
+        "Vue 3",
+        "React 18",
+        "Web Components",
+        "Module Federation",
+        "GitHub Pages"
+      ].map((t, i) => /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "footer-pill", children: t }, i)) })
     ] })
   ] });
 }
