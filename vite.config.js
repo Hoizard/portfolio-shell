@@ -4,6 +4,22 @@ import vue from "@vitejs/plugin-vue";
 import federation from "@originjs/vite-plugin-federation";
 
 const GITHUB_USER = "hoizard";
+const isProd = process.env.NODE_ENV === "production";
+
+const remotes = isProd
+  ? {
+      // Production — fetch from live GitHub Pages deployments
+      mfe_vue_tasks: `https://${GITHUB_USER}.github.io/mfe-vue-tasks/dist/remoteEntry.js`,
+      mfe_angular_counter: `https://${GITHUB_USER}.github.io/mfe-angular-counter/dist/remoteEntry.js`,
+      mfe_react_weather: `https://${GITHUB_USER}.github.io/mfe-react-weather/dist/remoteEntry.js`,
+    }
+  : {
+      // Local dev — each MFE must be running via `npm run build && npm run preview`
+      // Default preview ports are 4173, 4174, 4175 (increment if ports are taken)
+      mfe_vue_tasks: "http://localhost:4173/dist/remoteEntry.js",
+      mfe_angular_counter: "http://localhost:4174/dist/remoteEntry.js",
+      mfe_react_weather: "http://localhost:4175/dist/remoteEntry.js",
+    };
 
 export default defineConfig({
   plugins: [
@@ -11,11 +27,7 @@ export default defineConfig({
     vue(),
     federation({
       name: "portfolio_shell",
-      remotes: {
-        mfe_vue_tasks: `https://${GITHUB_USER}.github.io/mfe-vue-tasks/dist/remoteEntry.js`,
-        mfe_angular_counter: `https://${GITHUB_USER}.github.io/mfe-angular-counter/dist/remoteEntry.js`,
-        mfe_react_weather: `https://${GITHUB_USER}.github.io/mfe-react-weather/dist/remoteEntry.js`,
-      },
+      remotes,
       shared: ["react", "react-dom", "vue"],
     }),
   ],
