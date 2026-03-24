@@ -493,7 +493,7 @@ var m = reactDomExports;
   client.hydrateRoot = m.hydrateRoot;
 }
 
-const scriptRel = 'modulepreload';const assetsURL = function(dep) { return "https://erickcguz.github.io/portfolio-shell/"+dep };const seen = {};const __vitePreload = function preload(baseModule, deps, importerUrl) {
+const scriptRel = 'modulepreload';const assetsURL = function(dep) { return "https://hoizard.github.io/portfolio-shell/"+dep };const seen = {};const __vitePreload = function preload(baseModule, deps, importerUrl) {
   let promise = Promise.resolve();
   if (true && deps && deps.length > 0) {
     document.getElementsByTagName("link");
@@ -554,9 +554,9 @@ const scriptRel = 'modulepreload';const assetsURL = function(dep) { return "http
 };
 
 const remotesMap = {
-'mfe_vue_tasks':{url:'https://erickcguz.github.io/mfe-vue-tasks/dist/remoteEntry.js',format:'esm',from:'vite'},
-  'mfe_angular_counter':{url:'https://erickcguz.github.io/mfe-angular-counter/dist/remoteEntry.js',format:'esm',from:'vite'},
-  'mfe_react_weather':{url:'https://erickcguz.github.io/mfe-react-weather/dist/remoteEntry.js',format:'esm',from:'vite'}
+'mfe_vue_tasks':{url:'https://hoizard.github.io/mfe-vue-tasks/dist/remoteEntry.js',format:'esm',from:'vite'},
+  'mfe_angular_counter':{url:'https://hoizard.github.io/mfe-angular-counter/dist/remoteEntry.js',format:'esm',from:'vite'},
+  'mfe_react_weather':{url:'https://hoizard.github.io/mfe-react-weather/dist/remoteEntry.js',format:'esm',from:'vite'}
 };
                 const currentImports = {};
                 const loadJS = async (url, fn) => {
