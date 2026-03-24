@@ -5,6 +5,7 @@ import federation from "@originjs/vite-plugin-federation";
 
 const GITHUB_USER = "hoizard";
 const isProd = process.env.NODE_ENV === "production";
+const REPO_NAME = "portfolio-shell";
 
 const remotes = isProd
   ? {
@@ -35,5 +36,5 @@ export default defineConfig({
     target: "esnext",
     minify: false,
   },
-  base: `https://${GITHUB_USER}.github.io/portfolio-shell/`,
+  base: `/${REPO_NAME}/`,
 });
