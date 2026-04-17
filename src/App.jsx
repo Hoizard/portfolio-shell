@@ -1,11 +1,11 @@
 import React, { Suspense, lazy, useEffect, useRef } from "react";
 
 // ── Lazy load each MFE via Module Federation ──────────────────────────────
-const TaskWidget = lazy(() =>
-  import("mfe_vue_tasks/TaskWidget").then((m) => ({
-    default: m.default ?? m,
-  })),
-);
+// const TaskWidget = lazy(() =>
+//   import("mfe_vue_tasks/TaskWidget").then((m) => ({
+//     default: m.default ?? m,
+//   })),
+// );
 const WeatherWidget = lazy(() =>
   import("mfe_react_weather/WeatherWidget").then((m) => ({
     default: m.default ?? m,
@@ -13,15 +13,15 @@ const WeatherWidget = lazy(() =>
 );
 
 // The Angular MFE exports a Custom Element — we mount it via a React wrapper
-function CounterWidgetWrapper() {
-  const ref = useRef(null);
+// function CounterWidgetWrapper() {
+//   const ref = useRef(null);
 
-  useEffect(() => {
-    import("mfe_angular_counter/CounterWidget").catch(console.error);
-  }, []);
+//   useEffect(() => {
+//     import("mfe_angular_counter/CounterWidget").catch(console.error);
+//   }, []);
 
-  return <counter-widget ref={ref}></counter-widget>;
-}
+//   return <counter-widget ref={ref}></counter-widget>;
+// }
 
 // ── MFE Panel wrapper ─────────────────────────────────────────────────────
 function MfePanel({ color, label, sublabel, mountId, children }) {
@@ -113,26 +113,26 @@ function MfePanel({ color, label, sublabel, mountId, children }) {
 }
 
 // ── Vue task widget rendered into shadow DOM via React ref ────────────────
-function VueTaskWrapper() {
-  const mountRef = useRef(null);
+// function VueTaskWrapper() {
+//   const mountRef = useRef(null);
 
-  useEffect(() => {
-    if (!mountRef.current) return;
-    import("mfe_vue_tasks/TaskWidget")
-      .then(({ default: TaskWidget }) => {
-        const { createApp } = window.__VUE__ ?? {};
-        // Vite federation shares Vue — use the shared instance
-        import("vue").then(({ createApp }) => {
-          const app = createApp(TaskWidget);
-          app.mount(mountRef.current);
-          return () => app.unmount();
-        });
-      })
-      .catch(console.error);
-  }, []);
+//   useEffect(() => {
+//     if (!mountRef.current) return;
+//     import("mfe_vue_tasks/TaskWidget")
+//       .then(({ default: TaskWidget }) => {
+//         const { createApp } = window.__VUE__ ?? {};
+//         // Vite federation shares Vue — use the shared instance
+//         import("vue").then(({ createApp }) => {
+//           const app = createApp(TaskWidget);
+//           app.mount(mountRef.current);
+//           return () => app.unmount();
+//         });
+//       })
+//       .catch(console.error);
+//   }, []);
 
-  return <div ref={mountRef}></div>;
-}
+//   return <div ref={mountRef}></div>;
+// }
 
 // ── Main App ──────────────────────────────────────────────────────────────
 export default function App() {
@@ -203,152 +203,6 @@ export default function App() {
           </div>
         </section>
 
-        {/* EXPERIENCE */}
-        <section id="experience" className="section">
-          <div className="section-header">
-            <p className="section-eyebrow">Career</p>
-            <h2 className="section-title">Experience</h2>
-          </div>
-          <div className="exp-list">
-            {[
-              {
-                dates: "Apr 2022 – Present",
-                role: "Software Engineer II",
-                company: "Oak Street Health",
-                bullets: [
-                  "Led microfrontend architecture migration to Vue 3 + Vite + Vitest.",
-                  "Built collaborative editing with streaming endpoints, Tanstack Query, and Pinia.",
-                  "Established Architecture Decision Records (ADRs) and frontend coding standards.",
-                  "Drove spike stories validating architectural and tooling decisions.",
-                ],
-              },
-              {
-                dates: "Apr 2021 – Mar 2022",
-                role: "Software Engineer",
-                company: "Oak Street Health",
-                bullets: [
-                  "Created a VueJS page that increased unsigned document signing by 88.46% (10,670 docs) in the first week.",
-                  "Implemented the first streaming service with RxJS — enabling clinical staff live task updates.",
-                ],
-              },
-              {
-                dates: "Jun 2019 – Mar 2021",
-                role: "Junior Application Developer",
-                company: "Oak Street Health",
-                bullets: [
-                  "Built Windows services for automated healthcare workflows and batch processing.",
-                  "Automated referral task flow via ASP.NET with electronic signatures.",
-                ],
-              },
-              {
-                dates: "Jun 2017 – May 2019",
-                role: "Computer Engineer",
-                company: "Oak Street Health",
-                bullets: [
-                  "Delivered deskside support for 1,000+ users including AD management and hardware.",
-                ],
-              },
-            ].map((job, i) => (
-              <div key={i} className="exp-item">
-                <div className="exp-meta">
-                  <div className="exp-dates">{job.dates}</div>
-                </div>
-                <div>
-                  <div className="exp-role">{job.role}</div>
-                  <div className="exp-company">{job.company}</div>
-                  <ul className="exp-bullets">
-                    {job.bullets.map((b, j) => (
-                      <li key={j}>{b}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* SKILLS */}
-        <section id="skills" className="section">
-          <div className="section-header">
-            <p className="section-eyebrow">Stack</p>
-            <h2 className="section-title">Skills & Technologies</h2>
-          </div>
-          <div className="skills-grid">
-            {[
-              {
-                title: "Frontend",
-                tags: [
-                  "Vue 3",
-                  "TypeScript",
-                  "JavaScript",
-                  "Pinia",
-                  "Tanstack Query",
-                  "Vite",
-                  "Tailwind CSS",
-                ],
-              },
-              {
-                title: "Backend",
-                tags: [
-                  "ASP.NET",
-                  "C#",
-                  "Entity Framework",
-                  "MS SQL",
-                  "Web API",
-                  "RxJS",
-                ],
-              },
-              {
-                title: "Testing & Tooling",
-                tags: ["Vitest", "Cypress", "Docker", "Cursor", "GitHub"],
-              },
-              {
-                title: "Architecture",
-                tags: [
-                  "Microfrontends",
-                  "ADRs",
-                  "Repository Pattern",
-                  "Streaming APIs",
-                  "SPA",
-                ],
-              },
-              {
-                title: "Learning Now",
-                tags: [
-                  "AWS",
-                  "Kubernetes",
-                  "Terraform",
-                  "Azure OpenAI",
-                  "Python",
-                ],
-                accent: true,
-              },
-              {
-                title: "Domain",
-                tags: [
-                  "Healthcare Tech",
-                  "Clinical Workflows",
-                  "Cross-team Leadership",
-                ],
-              },
-            ].map((group, i) => (
-              <div key={i} className="skill-group">
-                <div className="skill-group-title">{group.title}</div>
-                <div className="skill-tags">
-                  {group.tags.map((t, j) => (
-                    <span
-                      key={j}
-                      className={`tag ${group.accent ? "tag-accent" : ""}`}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
         {/* MFE DEMO */}
         <section id="mfe-demo" className="section">
           <div className="section-header">
@@ -373,245 +227,43 @@ export default function App() {
               <span className="arch-node arch-rea">mfe-react-weather</span>
             </div>
 
+            <div>
+              <WeatherWidget />
+            </div>
+
             <div className="mfe-panels">
-              <MfePanel
+              {/* <MfePanel
                 color="vue"
                 label="Vue 3"
                 sublabel="Composition API"
                 mountId="vue-mfe"
               >
                 <VueTaskWrapper />
-              </MfePanel>
+              </MfePanel> */}
 
-              {/* <MfePanel color="angular" label="Angular" sublabel="Custom Element" mountId="angular-mfe">
+              {/* <MfePanel
+                color="angular"
+                label="Angular"
+                sublabel="Custom Element"
+                mountId="angular-mfe"
+              >
                 <CounterWidgetWrapper />
-              </MfePanel>
+              </MfePanel> */}
 
-              <MfePanel color="react" label="React 18" sublabel="Hooks + State" mountId="react-mfe">
-                <Suspense fallback={<div className="mfe-loading">loading React MFE…</div>}>
+              {/* <MfePanel
+                color="react"
+                label="React 18"
+                sublabel="Hooks + State"
+                mountId="react-mfe"
+              >
+                <Suspense
+                  fallback={
+                    <div className="mfe-loading">loading React MFE…</div>
+                  }
+                >
                   <WeatherWidget />
                 </Suspense>
               </MfePanel> */}
-            </div>
-          </div>
-        </section>
-
-        {/* PROJECTS */}
-        <section id="projects" className="section">
-          <div className="section-header">
-            <p className="section-eyebrow">Portfolio</p>
-            <h2 className="section-title">Projects</h2>
-          </div>
-          <div className="projects-grid">
-            {[
-              {
-                icon: "🎮",
-                name: "Gaming Stats Dashboard",
-                status: "building",
-                desc: "Real-time dashboard pulling stats from Steam & Riot Games APIs. AI-powered coaching tips via Azure OpenAI. End-to-end cloud deployment on AWS.",
-                tech: [
-                  "Vue 3",
-                  "ASP.NET",
-                  "AWS EC2",
-                  "Docker",
-                  "Azure OpenAI",
-                  "PostgreSQL",
-                ],
-              },
-              {
-                icon: "🔧",
-                name: "AI Home Maintenance Tracker",
-                status: "planned",
-                desc: "Log tasks, track tools, get AI repair guides. Upload a photo of something broken — get step-by-step fix instructions via Azure AI Vision.",
-                tech: [
-                  "Vue 3",
-                  "Semantic Kernel",
-                  "Azure AI Vision",
-                  "pgvector",
-                  "Service Bus",
-                ],
-              },
-              {
-                icon: "🎵",
-                name: "Smart Music Discovery",
-                status: "planned",
-                desc: "Connects to Spotify API, generates embeddings of your taste profile, and surfaces recommendations using vector similarity search.",
-                tech: [
-                  "Vue 3",
-                  "FastAPI",
-                  "OpenAI Embeddings",
-                  "Pinecone",
-                  "Redis",
-                  "AWS Lambda",
-                ],
-              },
-              {
-                icon: "⚡",
-                name: "MFE Portfolio Shell",
-                status: "live",
-                desc: "This site. Vue 3, Angular-style Web Component, and React 18 loaded via Module Federation from separate GitHub repos — each deploying independently.",
-                tech: [
-                  "Vue 3",
-                  "React 18",
-                  "Web Components",
-                  "Module Federation",
-                  "GitHub Pages",
-                ],
-              },
-            ].map((p, i) => (
-              <div
-                key={i}
-                className={`project-card ${p.status === "live" ? "project-live" : ""}`}
-              >
-                <div className="project-icon">{p.icon}</div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "8px",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div className="project-name">{p.name}</div>
-                  <span className={`project-status status-${p.status}`}>
-                    {p.status === "building"
-                      ? "In Progress"
-                      : p.status === "planned"
-                        ? "Planned"
-                        : "Live"}
-                  </span>
-                </div>
-                <p className="project-desc">{p.desc}</p>
-                <div className="project-tech">
-                  {p.tech.map((t, j) => (
-                    <span key={j} className="ptag">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* RESUME */}
-        <section id="resume" className="section">
-          <div className="section-header">
-            <p className="section-eyebrow">Full Document</p>
-            <h2 className="section-title">Resume</h2>
-          </div>
-          <div className="resume-card">
-            <div className="resume-header">
-              <div>
-                <div className="resume-name">Erick Cruz</div>
-                <div className="resume-title">Software Engineer II</div>
-              </div>
-              <div className="resume-contact">
-                <span>erickcruz147@gmail.com</span>
-                <span>(773) 818-6161</span>
-                <span>Chicago, IL</span>
-              </div>
-            </div>
-            <div className="resume-body">
-              <div>
-                <div className="res-section-title">Experience</div>
-                {[
-                  {
-                    title: "Software Engineer II",
-                    dates: "Apr 2022 – Present",
-                    company: "Oak Street Health",
-                    bullets: [
-                      "Led microfrontend migration to Vue 3 + Vite + Vitest",
-                      "Built collaborative editing with streaming endpoints & Tanstack Query",
-                      "Established ADRs and frontend coding standards",
-                    ],
-                  },
-                  {
-                    title: "Software Engineer",
-                    dates: "Apr 2021 – Mar 2022",
-                    company: "Oak Street Health",
-                    bullets: [
-                      "Increased doc signing by 88.46% (10,670 docs) in week one",
-                      "Built first streaming service with RxJS for live clinical updates",
-                    ],
-                  },
-                  {
-                    title: "Junior Application Developer",
-                    dates: "Jun 2019 – Mar 2021",
-                    company: "Oak Street Health",
-                    bullets: [
-                      "Windows services for automated healthcare workflows",
-                      "Automated referral task flow via ASP.NET",
-                    ],
-                  },
-                  {
-                    title: "Computer Engineer",
-                    dates: "Jun 2017 – May 2019",
-                    company: "Oak Street Health",
-                    bullets: ["Deskside support for 1,000+ users"],
-                  },
-                ].map((job, i) => (
-                  <div key={i} className="res-job">
-                    <div className="res-job-header">
-                      <span className="res-job-title">{job.title}</span>
-                      <span className="res-job-dates">{job.dates}</span>
-                    </div>
-                    <div className="res-job-company">{job.company}</div>
-                    <ul className="res-bullets">
-                      {job.bullets.map((b, j) => (
-                        <li key={j}>{b}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-                <div
-                  className="res-section-title"
-                  style={{ marginTop: "1.5rem" }}
-                >
-                  Education
-                </div>
-                <div className="res-edu-school">
-                  Illinois Institute of Technology
-                </div>
-                <div className="res-edu-degree">
-                  MS & BS in Software Development
-                </div>
-                <div className="res-edu-year">Chicago, IL · May 2019</div>
-              </div>
-              <div>
-                <div className="res-section-title">Skills</div>
-                {[
-                  {
-                    label: "Frontend",
-                    tags: [
-                      "TypeScript",
-                      "JavaScript",
-                      "VueJS",
-                      "Pinia",
-                      "Tanstack Query",
-                      "Vite",
-                      "Tailwind CSS",
-                    ],
-                  },
-                  {
-                    label: "Backend",
-                    tags: ["ASP.NET", "C#", "MS SQL", "Entity Framework"],
-                  },
-                  { label: "Testing", tags: ["Vitest", "Cypress"] },
-                  { label: "DevOps", tags: ["Docker", "Cursor"] },
-                ].map((g, i) => (
-                  <div key={i} className="res-skill-group">
-                    <div className="res-skill-label">{g.label}</div>
-                    <div className="res-skill-tags">
-                      {g.tags.map((t, j) => (
-                        <span key={j} className="res-tag">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </section>
