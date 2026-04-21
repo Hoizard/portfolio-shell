@@ -1,4 +1,5 @@
 import React, { Suspense, lazy, useEffect, useRef } from "react";
+import { ErrorBoundary } from "./components/ErrorBoundary/ErrorBoundary.jsx";
 
 // ── Lazy load each MFE via Module Federation ──────────────────────────────
 // const TaskWidget = lazy(() =>
@@ -7,7 +8,7 @@ import React, { Suspense, lazy, useEffect, useRef } from "react";
 //   })),
 // );
 const WeatherWidget = lazy(() =>
-  import("mfe_react_weather/WeatherWidget").then((m) => ({
+  import("mfe-react-weather/WeatherWidget").then((m) => ({
     default: m.default ?? m,
   })),
 );
@@ -228,7 +229,24 @@ export default function App() {
             </div>
 
             <div>
-              <WeatherWidget />
+              <ErrorBoundary fallbackMessage="Weather widget unavailable">
+                <Suspense
+                  fallback={
+                    <div
+                      style={{
+                        padding: "2rem",
+                        textAlign: "center",
+                        fontSize: "14px",
+                        color: "var(--hint)",
+                      }}
+                    >
+                      Loading weather widget…
+                    </div>
+                  }
+                >
+                  <WeatherWidget />
+                </Suspense>
+              </ErrorBoundary>
             </div>
 
             <div className="mfe-panels">
